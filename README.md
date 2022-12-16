@@ -24,3 +24,6 @@ Implementation av en dörrdisplay som visar utomhus- och inomhustemperatur, buss
 6. Ladda upp lämpliga övriga ikoner
 7. Konfigurera Home Assistant i `configuration.yaml` med innehållet i [openhasp.yaml](openhasp.yaml)
 8. Modifiera så allt passar ditt hem
+
+## Node-RED
+Jag använder Node-RED för att automatisera på- och avslag av skärmen. Mellan 07:00 och 00:30 är skärmen på, därefter slås den av. Slås larmet på så slås displayen av och slås larmet på så slås displayen på om tiden är inom tidsintervallet. Varje timme körs `antiburn`-tjänsten på displayen för att förhindra inbränning. Varje navigering från startsidan startar en timer som ändrar tillbaka till startsidan efter 180 sekunder. Node-RED-flödet finns [här](nodered-flow.json).
