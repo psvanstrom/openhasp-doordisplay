@@ -2,6 +2,9 @@
 
 Implementation av en dörrdisplay som visar utomhus- och inomhustemperatur, busstider och skolmat. Byggd på en WT32-SC01-display med OpenHASP (https://openhasp.com) och Home Assistant (https://www.home-assistant.io/).
 
+<img width="444" alt="image" src="https://user-images.githubusercontent.com/5547521/208207140-2e217786-7904-44ae-a059-6b8d6ce9ed81.png">
+
+
 ## Sensorer
 | Sensor        | Beskrivning |
 | ------------- |:-----|
