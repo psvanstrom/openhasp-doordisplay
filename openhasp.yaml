@@ -1,0 +1,118 @@
+plate_hall:
+  objects:
+    # Time label on all pages
+    - obj: "p0b1"
+      properties:
+        "text": '{{ states("sensor.time") }}'
+
+    # Temperature outside
+    - obj: "p1b3"
+      properties:
+        "text": >-
+          {% set temp = float(states("sensor.outside_temperature")) | round(1) %}
+          {{ float(0.0) if temp == 0.0 else temp }}
+
+    # Temperature outside min / max
+    - obj: "p1b5"
+      properties:
+        "text": 'min: {{ float(states("sensor.outside_temperature_min")) | round(1) }}°C, max: {{ float(states("sensor.outside_temperature_max")) | round(1) }}°C'
+
+    # Temperature inside
+    - obj: "p1b8"
+      properties:
+        "text": >-
+          {% set temp = float(states("sensor.inside_temperature")) | round(1) %}
+          {{ float(0.0) if temp == 0.0 else temp }}
+
+    # Temperature inside min / max
+    - obj: "p1b10"
+      properties:
+        "text": 'min: {{ float(states("sensor.inside_temperature_min")) | round(1) }}°C, max: {{ float(states("sensor.inside_temperature_max")) | round(1) }}°C'
+
+    # Weather icon
+    - obj: "p1b34"
+      properties:
+        "src": 'L:/{{ states("weather.hem") }}.png'
+
+    # Bus Tornfalksvägen
+    - obj: "p2b1"
+      properties:
+        "text": '{{ state_attr("sensor.hasl_tornfalksvagen", "departures")[0]["destination"] }} - {{ state_attr("sensor.hasl_tornfalksvagen", "departures")[0]["time"] }} min'
+    - obj: "p2b2"
+      properties:
+        "text": '{{ state_attr("sensor.hasl_tornfalksvagen", "departures")[1]["destination"] }} - {{ state_attr("sensor.hasl_tornfalksvagen", "departures")[1]["time"] }} min'
+
+    # Bus Johan Skytteskolan
+    - obj: "p2b3"
+      properties:
+        "text": '{{ state_attr("sensor.hasl_johanskytteskolan", "departures")[0]["destination"] }} - {{ state_attr("sensor.hasl_johanskytteskolan", "departures")[0]["time"] }} min'
+    - obj: "p2b4"
+      properties:
+        "text": '{{ state_attr("sensor.hasl_johanskytteskolan", "departures")[1]["destination"] }} - {{ state_attr("sensor.hasl_johanskytteskolan", "departures")[1]["time"] }} min'
+
+    # Light-switch Ytterdörr
+    - obj: "p3b1"
+      properties:
+        "val": '{{ 1 if states("light.ytterdorr_lampa") == "on" else 0 }}'
+        "text": '{{ "\uE6E8\nYtter-\ndörr" if is_state("light.ytterdorr_lampa", "on") else "\uE335\nYtter-\ndörr" | e }}'
+      event:
+        "up":
+          - service: homeassistant.toggle
+            entity_id: "light.ytterdorr_lampa"
+
+    # Light-switch Garageport
+    - obj: "p3b2"
+      properties:
+        "val": '{{ 1 if states("light.garagedorr_lampa") == "on" else 0 }}'
+        "text": '{{ "\uE6E8\nGarage-\nport" if is_state("light.garagedorr_lampa", "on") else "\uE335\nGarage-\nport" | e }}'
+      event:
+        "up":
+          - service: homeassistant.toggle
+            entity_id: "light.garagedorr_lampa"
+
+    # Light-switch Altan
+    - obj: "p3b3"
+      properties:
+        "val": '{{ 1 if states("switch.altan") == "on" else 0 }}'
+        "text": '{{ "\uE6E8\nAltan" if is_state("switch.altan", "on") else "\uE335\nAltan" | e }}'
+      event:
+        "up":
+          - service: homeassistant.toggle
+            entity_id: "switch.altan"
+
+    # Light-switch Vardagsrum
+    - obj: "p3b4"
+      properties:
+        "val": '{{ 1 if states("light.vardagsrum") == "on" else 0 }}'
+        "text": '{{ "\uE6E8\nVardags-\nrum" if is_state("light.vardagsrum", "on") else "\uE335\nVardags-\nrum" | e }}'
+      event:
+        "up":
+          - service: homeassistant.toggle
+            entity_id: "light.vardagsrum"
+
+    # Light-switch Nedervåning
+    - obj: "p3b5"
+      properties:
+        "val": '{{ 1 if states("light.nedre_hall_golvlampa") == "on" else 0 }}'
+        "text": '{{ "\uE6E8\nNeder-\nvåning" if is_state("light.nedre_hall_golvlampa", "on") else "\uE335\nNeder-\nvåning" | e }}'
+      event:
+        "up":
+          - service: homeassistant.toggle
+            entity_id: "light.nedre_hall_golvlampa"
+
+    # Matsedel måndag
+    - obj: "p4b4"
+      properties:
+        "text": '{{ states("sensor.skollunch_mandag") }}'
+    - obj: "p4b7"
+      properties:
+        "text": '{{ states("sensor.skollunch_tisdag") }}'
+    - obj: "p4b10"
+      properties:
+        "text": '{{ states("sensor.skollunch_onsdag") }}'
+    - obj: "p4b13"
+      properties:
+        "text": '{{ states("sensor.skollunch_torsdag") }}'
+    - obj: "p4b16"
+      properties:
+        "text": '{{ states("sensor.skollunch_fredag") }}'
