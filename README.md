@@ -23,7 +23,7 @@ Implementation av en dörrdisplay som visar utomhus- och inomhustemperatur, buss
 2. Installera Daily Sensor och HASL (se länkar ovan)
 3. Ladda upp [pages.jsonl](pages.jsonl) till displayen
 4. Ladda ned fonten [Oswald-Heavy](https://www.dafontfree.net/oswald-heavy/f92294.htm) och ladda upp ttf-filen till displayen.
-5. Ladda upp lämpliga väderikoner till displayen som matchar namnen som [väderintegrationen använder](https://www.home-assistant.io/integrations/weather/#condition-mapping).
+5. Ladda upp lämpliga väderikoner till displayen som matchar namnen som [väderintegrationen använder](https://www.home-assistant.io/integrations/weather/#condition-mapping). Jag utgick från dessa [ikoner](https://www.flaticon.com/packs/weather-1050).
 6. Ladda upp lämpliga övriga ikoner
 7. Konfigurera Home Assistant i `configuration.yaml` med innehållet i [openhasp.yaml](openhasp.yaml)
 8. Modifiera så allt passar ditt hem
