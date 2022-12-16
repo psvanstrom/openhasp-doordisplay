@@ -1,0 +1,473 @@
+[
+    {
+        "id": "2dcfa2e67ee9cd1b",
+        "type": "tab",
+        "label": "OpenHASP",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9b6141977ab711f2",
+        "type": "api-call-service",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "antiburn",
+        "server": "830066ed.e604b8",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "openhasp",
+        "service": "command",
+        "entityId": "openhasp.plate_hall",
+        "data": "{\"keyword\":\"antiburn\",\"parameters\":\"on\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 320,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "38221416aa9130f7",
+        "type": "inject",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "every hour",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "9b6141977ab711f2"
+            ]
+        ]
+    },
+    {
+        "id": "3de499010ab9ee98",
+        "type": "server-state-changed",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "page changed",
+        "server": "830066ed.e604b8",
+        "version": 1,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "openhasp.plate_hall",
+        "entityidfiltertype": "exact",
+        "outputinitially": true,
+        "state_type": "str",
+        "haltifstate": "1",
+        "halt_if_type": "str",
+        "halt_if_compare": "is_not",
+        "outputs": 2,
+        "output_only_on_state_change": false,
+        "for": "",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "daa4ba3d2046307f"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "be9ca3c394d0337e",
+        "type": "api-call-service",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "go to homepage",
+        "server": "830066ed.e604b8",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "openhasp",
+        "service": "command",
+        "entityId": "openhasp.plate_hall",
+        "data": "{\"keyword\":\"page\",\"parameters\":\"1\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 700,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "36164326cf9973db",
+        "type": "api-call-service",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "turn off backlight",
+        "server": "830066ed.e604b8",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "openhasp",
+        "service": "command",
+        "entityId": "openhasp.plate_hall",
+        "data": "{\"keyword\":\"backlight\",\"parameters\":\"off\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 750,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "213dc088255ef95a",
+        "type": "api-call-service",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "turn on backlight",
+        "server": "830066ed.e604b8",
+        "version": 1,
+        "debugenabled": false,
+        "service_domain": "openhasp",
+        "service": "command",
+        "entityId": "openhasp.plate_hall",
+        "data": "{\"keyword\":\"backlight\",\"parameters\":\"on\"}",
+        "dataType": "jsonata",
+        "mergecontext": "",
+        "output_location": "payload",
+        "output_location_type": "none",
+        "mustacheAltTags": false,
+        "x": 750,
+        "y": 600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "daa4ba3d2046307f",
+        "type": "countdown",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "",
+        "topic": "",
+        "payloadTimerStart": "0",
+        "payloadTimerStartType": "num",
+        "payloadTimerStop": "1",
+        "payloadTimerStopType": "num",
+        "timer": "180",
+        "resetWhileRunning": true,
+        "outputOnReset": false,
+        "setTimeToNewWhileRunning": true,
+        "startCountdownOnControlMessage": false,
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "8ad059f5c606104b"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "8ad059f5c606104b",
+        "type": "switch",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 490,
+        "y": 160,
+        "wires": [
+            [
+                "be9ca3c394d0337e"
+            ]
+        ]
+    },
+    {
+        "id": "6ad46d76c7d29cb4",
+        "type": "server-state-changed",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "Larmpanel",
+        "server": "830066ed.e604b8",
+        "version": 1,
+        "exposeToHomeAssistant": false,
+        "haConfig": [
+            {
+                "property": "name",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            }
+        ],
+        "entityidfilter": "alarm_control_panel.visonic_alarm",
+        "entityidfiltertype": "exact",
+        "outputinitially": true,
+        "state_type": "str",
+        "haltifstate": "",
+        "halt_if_type": "str",
+        "halt_if_compare": "is",
+        "outputs": 1,
+        "output_only_on_state_change": true,
+        "for": "",
+        "forType": "num",
+        "forUnits": "minutes",
+        "ignorePrevStateNull": false,
+        "ignorePrevStateUnknown": false,
+        "ignorePrevStateUnavailable": false,
+        "ignoreCurrentStateUnknown": false,
+        "ignoreCurrentStateUnavailable": false,
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "a986ddb069694e80"
+            ]
+        ]
+    },
+    {
+        "id": "a986ddb069694e80",
+        "type": "switch",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "Larmat på?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "^(armed_away|armed_home)$",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "eq",
+                "v": "disarmed",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 310,
+        "y": 480,
+        "wires": [
+            [
+                "36164326cf9973db"
+            ],
+            [
+                "f11bdae5626b0aa3"
+            ]
+        ]
+    },
+    {
+        "id": "f525fd577bd0663a",
+        "type": "eztimer",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "",
+        "debug": false,
+        "autoname": "07:00 - 00:30:00",
+        "tag": "eztimer",
+        "topic": "",
+        "suspended": false,
+        "sendEventsOnSuspend": false,
+        "latLongSource": "haZone",
+        "latLongHaZone": "zone.home",
+        "lat": "59.27355959427825",
+        "lon": "17.974714476149533",
+        "timerType": "1",
+        "startupMessage": true,
+        "ontype": "2",
+        "ontimesun": "dawn",
+        "ontimetod": "07:00",
+        "onpropertytype": "msg",
+        "onproperty": "payload",
+        "onvaluetype": "num",
+        "onvalue": 1,
+        "onoffset": 0,
+        "onrandomoffset": 0,
+        "onsuppressrepeats": false,
+        "offtype": "2",
+        "offtimesun": "dusk",
+        "offtimetod": "00:30:00",
+        "offduration": "00:01:00",
+        "offpropertytype": "msg",
+        "offproperty": "payload",
+        "offvaluetype": "num",
+        "offvalue": 0,
+        "offoffset": 0,
+        "offrandomoffset": 0,
+        "offsuppressrepeats": false,
+        "resend": false,
+        "resendInterval": "0s",
+        "mon": true,
+        "tue": true,
+        "wed": true,
+        "thu": true,
+        "fri": true,
+        "sat": true,
+        "sun": true,
+        "x": 340,
+        "y": 560,
+        "wires": [
+            [
+                "a63f53912d4cc720"
+            ]
+        ]
+    },
+    {
+        "id": "f11bdae5626b0aa3",
+        "type": "change",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "sync",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "sync",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 190,
+        "y": 560,
+        "wires": [
+            [
+                "f525fd577bd0663a"
+            ]
+        ]
+    },
+    {
+        "id": "a63f53912d4cc720",
+        "type": "switch",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "0",
+                "vt": "num"
+            },
+            {
+                "t": "eq",
+                "v": "1",
+                "vt": "num"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 560,
+        "wires": [
+            [
+                "36164326cf9973db",
+                "db457e04309d7e30"
+            ],
+            [
+                "213dc088255ef95a",
+                "db457e04309d7e30"
+            ]
+        ]
+    },
+    {
+        "id": "db457e04309d7e30",
+        "type": "ha-entity",
+        "z": "2dcfa2e67ee9cd1b",
+        "name": "plate_hall_on",
+        "server": "830066ed.e604b8",
+        "version": 1,
+        "debugenabled": false,
+        "outputs": 1,
+        "entityType": "binary_sensor",
+        "config": [
+            {
+                "property": "name",
+                "value": "binary_sensor.nodered_plate_hall_on"
+            },
+            {
+                "property": "device_class",
+                "value": ""
+            },
+            {
+                "property": "icon",
+                "value": ""
+            },
+            {
+                "property": "unit_of_measurement",
+                "value": ""
+            }
+        ],
+        "state": "payload",
+        "stateType": "msg",
+        "attributes": [],
+        "resend": true,
+        "outputLocation": "payload",
+        "outputLocationType": "none",
+        "inputOverride": "allow",
+        "outputOnStateChange": false,
+        "outputPayload": "$entity().state ? \"on\": \"off\"",
+        "outputPayloadType": "jsonata",
+        "x": 1050,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "830066ed.e604b8",
+        "type": "server",
+        "name": "Home Assistant",
+        "legacy": false,
+        "addon": false,
+        "rejectUnauthorizedCerts": true,
+        "ha_boolean": "y|yes|true|on|home|open",
+        "connectionDelay": true,
+        "cacheJson": true
+    }
+]
